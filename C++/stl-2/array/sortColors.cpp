@@ -35,6 +35,8 @@ public:
         }
 
         // // method 1, not using swap
+        /*此方法是先找到0和1对应的下标位置，然后再重新将数组按照该顺序填入对应的0、1、2
+        但并不符合题中要求的原地排序因此并不符合*/
         // for (int i = 0; i < n; ++i) {
         //     if (nums[i] == 0 && left <= n - 1) {
         //         left++;
@@ -53,13 +55,15 @@ public:
         // }
 
         // method 2 using swap
-        int p0 = 0, p1 = 0;
+        int p0 = 0, p1 = 0;//p0代表0对应的边界位置，p1代表1对应的边界位置
         for (int i = 0; i < n; ++i) {
             if (nums[i] == 1) {
-                swap(nums[i], nums[p1]);
+                swap(nums[i], nums[p1]);//如果数字为1，则交换当前位置与p0的位置
                 p1++;
-            } else if (nums[i] == 0) {
+            } else if (nums[i] == 0) {//如果数字为0，则先交换p0和当前的位置
                 swap(nums[i],nums[p0]);
+                // p0 < p1， 代表在p0和p1 - 1区间都是1，此时将p0和当前位置交换后，会把一个1交换到当前位置
+                // 因此，在这个情况下，需要将当前位置在此和p1进行交换，将置换到后方的1在换回1的右侧边界
                 if (p0 < p1) {
                     swap(nums[i], nums[p1]);
                 }

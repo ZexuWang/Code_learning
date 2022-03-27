@@ -33,11 +33,11 @@ public:
 
         vector<vector<int>> res;
         for (int i = 0; i < n; ++i) {
-            int left = intervals[i][0], right = intervals[i][1];
-            if (res.empty() || left > res.back()[1]) {
+            int left = intervals[i][0], right = intervals[i][1];//找到每个区间的左右边界点
+            if (res.empty() || left > res.back()[1]) {//若当前结果为空或者左侧边界点大于返回结果的右侧边界点，则不在区间内
                 res.push_back(intervals[i]);
             } else {
-                res.back()[1] = max(res.back()[1], right);
+                res.back()[1] = max(res.back()[1], right);//否则，在区间内，且我们需要找到合适的新的右边界
             }
         }
         return res;
