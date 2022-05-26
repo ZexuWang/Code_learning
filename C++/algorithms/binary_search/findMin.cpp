@@ -46,6 +46,6 @@ public:
                 left = mid + 1;
             }
         }
-    return nums[left];
+    return nums[left];// 此处放nums[left] nums[right]都可，因为此时的区间已经变成了长度为1的区间，left == right
 }
 };

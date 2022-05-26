@@ -31,6 +31,6 @@ public:
             int mid = (left + right) / 2;
             nums[mid] < nums[mid + 1] ? left = mid + 1 : right = mid;
         }
-        return left;
+        return left;// 此时return left 等价于return right
     }
 };

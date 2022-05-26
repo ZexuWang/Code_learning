@@ -39,9 +39,9 @@ s 和 t 只含有小写字母以及字符 '#'
 
 你可以用 O(N) 的时间复杂度和 O(1) 的空间复杂度解决该问题吗？
 */
-
 class Solution {
 public:
+    // 方法1:直接对比，时间复杂度和空间复杂度都为 o(n)
     bool backspaceCompare(string s, string t) {
         return clear_string(s) == clear_string(t);
     }
@@ -57,18 +57,23 @@ public:
         }
         return ret;
     }
+
+    // 方法二：双指针
     bool backspaceCompare(string s, string t) {
-        int s_idx = s.length() - 1;
+        int s_idx = s.length() - 1;//记录当前所在的下标位置
         int t_idx = t.length() - 1;
-        int skips = 0;
+        int skips = 0;//记录#的个数
         int skipt = 0;
 
         while(s_idx >= 0 || t_idx >= 0) {
+            //从s和t的最右侧开始往左滑动两个指针
             while (s_idx >= 0) {
                 if(s[s_idx] == '#') {
+                    //删除当前的‘#’并记录需要删除的字符个数
                     s_idx--;
                     skips++;
                 } else if (skips > 0) {
+                    //删除‘#’个数对应的字符个数
                     skips--;
                     s_idx--;
                 } else {
@@ -93,6 +98,7 @@ public:
             } else if (s_idx >= 0 || t_idx >= 0) {
                 return false;
             }
+        //移动指针
         s_idx--;
         t_idx--;
         }
